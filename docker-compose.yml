@@ -1,0 +1,52 @@
+x-rails: &rails-defaults
+  build:
+      context: .
+      dockerfile: Dockerfile.dev
+  command: bash -lc "rm -f tmp/pids/server.pid && bundle exec rails server -b 0.0.0.0 -p 3000"
+  env_file: .env
+  volumes:
+      - .:/rails
+      - bundle_cache:/usr/local/bundle
+      - node_modules:/app/node_modules
+  environment:
+    RAILS_ENV: development
+    DB_HOST: db
+    DB_PORT: 5432
+    DB_NAME: ai_flow_development
+    DB_USER: postgres
+    DB_PASSWORD: postgres
+  depends_on:
+    db:
+      condition: service_healthy
+  stdin_open: true
+  tty: true
+
+services:
+  web:
+    <<: *rails-defaults
+
+  worker:
+    <<: *rails-defaults
+    command: bash -lc "bundle exec bin/jobs"
+
+  db:
+    image: postgres:16
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: ai_flow_development
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d ai_flow_development"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+volumes:
+  postgres_data:
+  bundle_cache:
+  node_modules:
+    
