@@ -1,0 +1,15 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  workspace: one
+  name: MyString
+  description: MyText
+  status: MyString
+  current_version: one
+
+two:
+  workspace: two
+  name: MyString
+  description: MyText
+  status: MyString
+  current_version: two

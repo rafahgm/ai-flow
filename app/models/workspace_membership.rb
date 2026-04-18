@@ -1,0 +1,14 @@
+class WorkspaceMembership < ApplicationRecord
+  ROLES = %w[owner admin member viewer].freeze
+
+  belongs_to :workspace
+  belongs_to :user
+
+  validates :role, presence: true, inclusion: { in: ROLES }
+  validates :user_id, uniqueness: { scope: :workspace_id }
+
+  scope :owners, -> { where(role: "owner") }
+  scope :amdins, -> { where(role: "admin") }
+  scope :members_only, -> { where(role: "member") }
+  scope :viewers, -> { where(role: "viewers") }
+end

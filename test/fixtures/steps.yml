@@ -1,0 +1,17 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  flow_version: one
+  key: MyString
+  name: MyString
+  step_type: MyString
+  position: 1
+  config_json: 
+
+two:
+  flow_version: two
+  key: MyString
+  name: MyString
+  step_type: MyString
+  position: 1
+  config_json: 
