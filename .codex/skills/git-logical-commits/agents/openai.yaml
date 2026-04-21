@@ -1,0 +1,7 @@
+interface:
+  display_name: "Git Logical Commits"
+  short_description: "Split git changes into clean logical commits"
+  default_prompt: "Use $git-logical-commits to analyze my local changes, split them into logical commits, and create Conventional Commits."
+
+policy:
+  allow_implicit_invocation: true
