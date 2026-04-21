@@ -1,24 +1,34 @@
-# README
+# ai-flow
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## Desenvolvimento com Docker
 
-Things you may want to cover:
+O projeto usa `docker-compose.yml` para subir a aplicacao Rails, PostgreSQL e o worker do `solid_queue`.
 
-* Ruby version
+1. Crie o arquivo de ambiente com base no exemplo:
 
-* System dependencies
+```bash
+cp .env.example .env
+```
 
-* Configuration
+2. Construa as imagens e suba os servicos:
 
-* Database creation
+```bash
+docker compose up --build
+```
 
-* Database initialization
+3. Se precisar preparar o ambiente manualmente:
 
-* How to run the test suite
+```bash
+docker compose run --rm web bin/setup --skip-server
+```
 
-* Services (job queues, cache servers, search engines, etc.)
+A aplicacao fica disponivel em `http://localhost:3000` e o PostgreSQL em `localhost:5432`.
 
-* Deployment instructions
+## Comandos uteis
 
-* ...
+```bash
+docker compose exec web bin/rails console
+docker compose exec web bin/rails test
+docker compose exec web bundle exec rubocop
+docker compose logs -f worker
+```
