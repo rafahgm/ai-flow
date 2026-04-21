@@ -13,6 +13,6 @@ class CreateSteps < ActiveRecord::Migration[8.1]
 
     add_index :steps, [ :flow_version_id, :key ], unique: true
     add_index :steps, [ :flow_version_id, :position ]
-    add_index :steps, :step_type
+    add_index :steps, :type
   end
 end

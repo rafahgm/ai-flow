@@ -5,7 +5,6 @@ class CreateFlows < ActiveRecord::Migration[8.1]
       t.string :name, null: false
       t.text :description
       t.string :status, null: false, default: "draft"
-      t.references :current_version, null: false, foreign_key: { to_table: :flow_versions }
 
       t.timestamps
     end
