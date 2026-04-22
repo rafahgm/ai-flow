@@ -6,7 +6,7 @@ class CreateSteps < ActiveRecord::Migration[8.1]
       t.string :name, null: false
       t.string :type, null: false
       t.integer :position, null: false
-      t.jsonb :config_json, null: false, default: {}
+      t.json :config_json, null: false, default: {}
 
       t.timestamps
     end
