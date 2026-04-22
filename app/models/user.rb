@@ -6,6 +6,8 @@ class User < ApplicationRecord
   has_many :workspaces, through: :workspace_memberships
   has_many :created_flow_versions, class_name: "FlowVersion", foreign_key: :created_by_id, dependent: :nullify
 
+  normalizes :email, with: ->(e) { e.strip.downcase }
 
-  normalizes :email_address, with: ->(e) { e.strip.downcase }
+  validates :name, presence: true
+  validates :email, presence: true, uniqueness: true
 end
